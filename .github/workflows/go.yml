@@ -1,3 +1,7 @@
+
+Viewed
+Original file line number	Original file line	Diff line number	Diff line change
+@@ -0,0 +1,52 @@
 # This workflow will build a golang project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
 
@@ -18,7 +22,6 @@ jobs:
       - name: Vet
         run: |
           go vet ./... 
-
   deploy:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
