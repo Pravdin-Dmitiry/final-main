@@ -39,6 +39,7 @@ func (s ParcelService) Register(client int, address string) (Parcel, error) {
 	}
 
 	id, err := s.store.Add(parcel)
+	
 	if err != nil {
 		return parcel, err
 	}
@@ -53,15 +54,18 @@ func (s ParcelService) Register(client int, address string) (Parcel, error) {
 
 func (s ParcelService) PrintClientParcels(client int) error {
 	parcels, err := s.store.GetByClient(client)
+	
 	if err != nil {
 		return err
 	}
 
 	fmt.Printf("Посылки клиента %d:\n", client)
+	
 	for _, parcel := range parcels {
 		fmt.Printf("Посылка № %d на адрес %s от клиента с идентификатором %d зарегистрирована %s, статус %s\n",
 			parcel.Number, parcel.Address, parcel.Client, parcel.CreatedAt, parcel.Status)
 	}
+	
 	fmt.Println()
 
 	return nil
@@ -69,6 +73,7 @@ func (s ParcelService) PrintClientParcels(client int) error {
 
 func (s ParcelService) NextStatus(number int) error {
 	parcel, err := s.store.Get(number)
+	
 	if err != nil {
 		return err
 	}
@@ -98,10 +103,12 @@ func (s ParcelService) Delete(number int) error {
 
 func main() {
 	db, err := sql.Open("sqlite", "tracker.db")
+	
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
+	
 	defer db.Close()
 
 	store := NewParcelStore(db)
@@ -111,6 +118,7 @@ func main() {
 	client := 1
 	address := "Псков, д. Пушкина, ул. Колотушкина, д. 5"
 	p, err := service.Register(client, address)
+	
 	if err != nil {
 		fmt.Println(err)
 		return
