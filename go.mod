@@ -1,4 +1,4 @@
-module linemk/final-main
+module Pravdin-Dmitiry/final-main
 
 go 1.23.4
 
